@@ -1,28 +1,37 @@
-import 'package:estudar_app/datas/subjects_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:estudar_app/datas/class_data.dart';
 import 'package:estudar_app/models/subject_model.dart';
-import 'package:estudar_app/widgets/colorpick_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class NewClassScreen extends StatefulWidget {
+
+  final DocumentSnapshot snapshotsubject;
+  NewClassScreen(this.snapshotsubject);
   @override
-  _NewClassScreenState createState() => _NewClassScreenState();
+  _NewClassScreenState createState() => _NewClassScreenState(snapshotsubject);
 }
 
 class _NewClassScreenState extends State<NewClassScreen> {
   final nameController = TextEditingController();
-  final nicknameController = TextEditingController();
-  String subjectColor ;
+  final numberController = TextEditingController();
+  final endPageController = TextEditingController();
+  final currentPageController = TextEditingController();
+  final exerciciesController = TextEditingController();
+  final percentHitsController = TextEditingController();
+  final DocumentSnapshot snapshotsubject;
 
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  _NewClassScreenState(this.snapshotsubject);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Nova Disciplina"),
+        title: Text("Nova Aula"),
         centerTitle: true,
       ),
       body: ScopedModelDescendant<SubjectModel>(
@@ -44,29 +53,52 @@ class _NewClassScreenState extends State<NewClassScreen> {
                     ),
                     SizedBox(height: 24.0),
                     TextFormField(
-                      controller: nicknameController,
+                      controller: numberController,
                       decoration: InputDecoration(
-                          hintText: "Tag"
+                          hintText: "Número da aula"
                       ),
 
                       validator: (text){
-                        if(text.isEmpty ) return "Tag inválida!";
+                        if(text.isEmpty ) return "Número inválida!";
                       },
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 36.0),
-                        child:  Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text("Cor:    ", style: TextStyle(fontSize: 24.0),),
-                            ColorPick(subjectColor, getColor),
-                          ],
-                        ),
-                      )
+                    
+                    SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: endPageController,
+                      decoration: InputDecoration(
+                          hintText: "Número de páginas"
                       ),
+
+                      validator: (text){
+                        if(text.isEmpty ) return "Número inválida!";
+                      },
+                    ),
+                    SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: currentPageController,
+                      decoration: InputDecoration(
+                          hintText: "Página atual"
+                      ),
+
+                      validator: (text){
+                        if(text.isEmpty ) return "Número inválida!";
+                      },
+                    ),
+                    SizedBox(height: 24.0),
+                    TextFormField(
+                      controller: exerciciesController,
+                      decoration: InputDecoration(
+                          hintText: "Exercicios Feitos"
+                      ),
+                      
+                      validator: (text){
+                        if(text.isEmpty ) return "Número inválida!";
+                      },
+                    ),
+
+              
+                    
 
 
                     SizedBox(height: 32.0),
@@ -78,17 +110,22 @@ class _NewClassScreenState extends State<NewClassScreen> {
                       onPressed: (){
                         if(_formKey.currentState.validate()){
 
-                          Subject subject = Subject();
-                            subject.name = nameController.text;
-                           subject.shortName = nicknameController.text;
-                            subject.color = subjectColor;
+                          Class classes = Class();
+                            classes.name = nameController.text;
+                            classes.number = int.parse(numberController.text);
+                            classes.endPage = int.parse(endPageController.text);
+                            classes.currentPage = int.parse(currentPageController.text);
+                            classes.exercicies = int.parse(exerciciesController.text);
+                            
+                          print(classes.name);
+                           print(classes.number);
+                            print(classes.endPage);
+                             print(classes.currentPage);
 
-                          SubjectModel.of(context).addSubject(subject);
 
-                          print(subject.name) ;
-                          print(subject.shortName);
-                          print(subject.color);
-                          print(subject.sid);
+                          SubjectModel.of(context).addClass(classes, snapshotsubject);
+
+                         
                         }
                         _scaffoldKey.currentState.showSnackBar(
                             SnackBar(
@@ -110,24 +147,7 @@ class _NewClassScreenState extends State<NewClassScreen> {
     );
   }
 
-  void _onSuccess(){
-    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Container(padding: EdgeInsets.only(left: 56.0), child: Text("Usuário criado com sucesso!",),),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 2),));
-
-    Future.delayed(Duration(seconds: 2)).then((_){
-      Navigator.of(context).pop();
-    });
-  }
-  void _onFail(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Container(padding: EdgeInsets.only(left: 56.0), child: Text("Falha ao criar usuário!",),),
-          backgroundColor: Colors.redAccent,
-          duration: Duration(seconds: 2),));
-  }
-
-  getColor(color){
-    subjectColor = color;
-  }
+  
+  
 
 }

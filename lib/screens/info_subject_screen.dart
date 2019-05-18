@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:estudar_app/models/user_model.dart';
+import 'package:estudar_app/screens/new_class_screen.dart';
 import 'package:estudar_app/tiles/class_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,8 @@ class InfoSubjectScreen extends StatelessWidget {
           label: const Text('Nova Aula'),
           backgroundColor: Color(int.parse(snapshotsubject.data["color"])),
           onPressed: () {
-           
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context)=> NewClassScreen(snapshotsubject)));
 
           },
         ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:estudar_app/datas/class_data.dart';
 import 'package:estudar_app/datas/subjects_data.dart';
 import 'package:estudar_app/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -33,9 +34,9 @@ class SubjectModel extends Model {
   }
 
 
-  void addClass(){
-
-
+  void addClass(Class classes, DocumentSnapshot snapshotsubject){
+     Firestore.instance.collection("user").document(user.firebaseUser.uid).collection("subjects").document(snapshotsubject.data["sid"]).collection("class").add(classes.toMap());
+    notifyListeners();
   }
   void removeClass(){
 
