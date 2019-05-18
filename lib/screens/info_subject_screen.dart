@@ -63,7 +63,7 @@ class InfoSubjectScreen extends StatelessWidget {
           label: const Text('Nova Aula'),
           backgroundColor: Color(int.parse(snapshotsubject.data["color"])),
           onPressed: () {
-            _showDialogNewClass(context);
+           
 
           },
         ),
@@ -162,37 +162,4 @@ class InfoSubjectScreen extends StatelessWidget {
     );
   }
 
-
-void _showDialogNewClass(BuildContext context) {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: const Text('Nova Aula'),
-          content: SingleChildScrollView(
-            child: Text("Tem certeza?"),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('Salvar'),
-              onPressed: () {
-                
-
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: const Text('Cancelar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 }

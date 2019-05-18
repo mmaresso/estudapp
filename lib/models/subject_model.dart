@@ -31,4 +31,14 @@ class SubjectModel extends Model {
     //subjects.remove(subject);
     notifyListeners();
   }
+
+
+  void addClass(){
+
+
+  }
+  void removeClass(){
+
+    
+  }
 }
