@@ -85,7 +85,7 @@ class InfoSubjectScreen extends StatelessWidget {
                 .document(user.firebaseUser.uid)
                 .collection("subjects")
                 .document(snapshotsubject.data["sid"])
-                .collection("class")
+                .collection("class").orderBy("number")
                 .getDocuments(),
             builder: (context, snapshot) {
               if (!snapshot.hasData)

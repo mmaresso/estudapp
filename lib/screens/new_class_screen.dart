@@ -31,8 +31,10 @@ class _NewClassScreenState extends State<NewClassScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor: Color(int.parse(snapshotsubject.data["color"])),
         title: Text("Nova Aula"),
         centerTitle: true,
+        
       ),
       body: ScopedModelDescendant<SubjectModel>(
           builder: (context, child, model){
@@ -44,18 +46,20 @@ class _NewClassScreenState extends State<NewClassScreen> {
                     SizedBox(height: 24.0),
                     TextFormField(
                       controller: nameController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       decoration: InputDecoration(
-                          hintText: "Nome"
+                          hintText: "Assunto(s) da Aula"
                       ),
                       validator: (text){
-                        if(text.isEmpty ) return "Nome inválido!";
+                        if(text.isEmpty ) return "Inválido!";
                       },
                     ),
                     SizedBox(height: 24.0),
                     TextFormField(
                       controller: numberController,
                       decoration: InputDecoration(
-                          hintText: "Número da aula"
+                          hintText: "Nº da Aula"
                       ),
 
                       validator: (text){
@@ -67,29 +71,19 @@ class _NewClassScreenState extends State<NewClassScreen> {
                     TextFormField(
                       controller: endPageController,
                       decoration: InputDecoration(
-                          hintText: "Número de páginas"
+                          hintText: "Nº de Páginas"
                       ),
 
                       validator: (text){
                         if(text.isEmpty ) return "Número inválida!";
                       },
                     ),
-                    SizedBox(height: 24.0),
-                    TextFormField(
-                      controller: currentPageController,
-                      decoration: InputDecoration(
-                          hintText: "Página atual"
-                      ),
-
-                      validator: (text){
-                        if(text.isEmpty ) return "Número inválida!";
-                      },
-                    ),
+                    
                     SizedBox(height: 24.0),
                     TextFormField(
                       controller: exerciciesController,
                       decoration: InputDecoration(
-                          hintText: "Exercicios Feitos"
+                          hintText: "Nº Exercícios"
                       ),
                       
                       validator: (text){
@@ -106,7 +100,7 @@ class _NewClassScreenState extends State<NewClassScreen> {
                       child: Text("Adicionar", style: TextStyle(fontSize: 18.0),),
                       textColor: Colors.white,
                       elevation: 8.0,
-                      color: Theme.of(context).primaryColor,
+                      color: Color(int.parse(snapshotsubject.data["color"])),
                       onPressed: (){
                         if(_formKey.currentState.validate()){
 
@@ -114,8 +108,9 @@ class _NewClassScreenState extends State<NewClassScreen> {
                             classes.name = nameController.text;
                             classes.number = int.parse(numberController.text);
                             classes.endPage = int.parse(endPageController.text);
-                            classes.currentPage = int.parse(currentPageController.text);
+                            classes.currentPage = 0;
                             classes.exercicies = int.parse(exerciciesController.text);
+                            classes.percentHits = 0.0;
                             
                           print(classes.name);
                            print(classes.number);
@@ -131,7 +126,7 @@ class _NewClassScreenState extends State<NewClassScreen> {
                             SnackBar(
                               content: Container(
                                 padding: EdgeInsets.only(left: 56.0),
-                                child: Text("Disciplina adicionada com sucesso!",),),
+                                child: Text("Aula de ${snapshotsubject.data["name"]} adicionada com sucesso!",),),
                           backgroundColor: Theme.of(context).primaryColor,
                           duration: Duration(seconds: 2),));
 
