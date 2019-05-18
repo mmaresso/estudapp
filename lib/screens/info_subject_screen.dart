@@ -71,7 +71,7 @@ class InfoSubjectScreen extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           child: new Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               //IconButton(icon: Icon(Icons.menu), onPressed: () {},),
             ],
