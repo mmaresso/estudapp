@@ -117,7 +117,7 @@ class ClassTile extends StatelessWidget {
 
       return SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 16.0, left: 100.0, right: 100.0, bottom: 0),
+          padding: EdgeInsets.only(top: 16.0, left: 64.0, right: 64.0, bottom: 64),
           child: Column(
                  
                   children: <Widget>[
@@ -169,7 +169,7 @@ class ClassTile extends StatelessWidget {
                       controller: exerciciesController,
                        textAlign: TextAlign.center,
                       decoration: InputDecoration(
-                          labelText: "Exercicios Feitos"
+                          labelText: "Nº Exercicios"
                       ),
                     ),
                     SizedBox(height: 24.0),
@@ -186,7 +186,7 @@ class ClassTile extends StatelessWidget {
                       child: Text("Salvar", style: TextStyle(fontSize: 18.0),),
                       textColor: Colors.white,
                       elevation: 8.0,
-                      color: Theme.of(context).primaryColor,
+                      color: Color(int.parse(snapshotsubject.data["color"])),
                       onPressed: (){
                         
                           Navigator.of(context).pop();

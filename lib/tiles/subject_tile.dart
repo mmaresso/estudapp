@@ -16,8 +16,8 @@ class SubjectTile extends StatelessWidget {
       title: Column(
         children: <Widget>[
           Text(
-            snapshot.data["name"],
-            style: TextStyle(fontSize: 24.0),
+            snapshot.data["name"],textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24.0, ),
           ),
           Text(
             snapshot.data["shortName"],

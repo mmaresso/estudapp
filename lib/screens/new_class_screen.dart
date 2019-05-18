@@ -111,11 +111,7 @@ class _NewClassScreenState extends State<NewClassScreen> {
                             classes.currentPage = 0;
                             classes.exercicies = int.parse(exerciciesController.text);
                             classes.percentHits = 0.0;
-                            
-                          print(classes.name);
-                           print(classes.number);
-                            print(classes.endPage);
-                             print(classes.currentPage);
+                          
 
 
                           SubjectModel.of(context).addClass(classes, snapshotsubject);

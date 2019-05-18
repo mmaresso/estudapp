@@ -31,10 +31,10 @@ class InfoSubjectScreen extends StatelessWidget {
                 text: "Aulas",
               ),
               Tab(
-                text: "Página",
+                text: "Estatísticas",
               ),
               Tab(
-                text: "Revisão",
+                text: "Editar",
               ),
             ],
           ),
