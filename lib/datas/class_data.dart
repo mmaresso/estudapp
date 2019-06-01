@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Class {
 
+  String cid;
   String name;
   int number;
   int endPage;
@@ -19,6 +20,7 @@ class Class {
 
   Class.fromDocument(DocumentSnapshot document){
     
+    cid = document.documentID;
     name = document.data["name"];
     number = document.data["number"];
     endPage = document.data["endPage"];
@@ -29,7 +31,7 @@ class Class {
 
   Map<String, dynamic> toMap(){
     return {
-      
+      "cid" : cid,
       "name": name,
       "number": number,
       "endPage": endPage,

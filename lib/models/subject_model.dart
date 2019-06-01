@@ -35,11 +35,22 @@ class SubjectModel extends Model {
 
 
   void addClass(Class classes, DocumentSnapshot snapshotsubject){
-     Firestore.instance.collection("user").document(user.firebaseUser.uid).collection("subjects").document(snapshotsubject.data["sid"]).collection("class").add(classes.toMap());
+     Firestore.instance.collection("user").document(user.firebaseUser.uid).collection("subjects").document(snapshotsubject.data["sid"]).collection("class").add(classes.toMap()).then((doc){
+       doc.updateData({
+         "cid" : doc.documentID});
+       classes.cid = doc.documentID;
+     });
     notifyListeners();
   }
   void removeClass(){
 
     
   }
+  void updateClass(Class classes, DocumentSnapshot snapshotsubject){
+    Firestore.instance.collection("user").document(user.firebaseUser.uid).collection("subjects").document(snapshotsubject.data["sid"]).collection("class").document(classes.cid).updateData(classes.toMap());
+    notifyListeners();
+  
+  }
+
+
 }
