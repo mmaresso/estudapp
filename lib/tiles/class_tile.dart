@@ -36,32 +36,44 @@ class _ClassTileState extends State<ClassTile> {
           Card(
             borderOnForeground: true,
             elevation: 3,
-            child: ListTile(
-              leading: CircleAvatar(
-                child: Text(
-                  (snapshot.data["number"]).toString(),
-                ),
-                backgroundColor:
-                    Color(int.parse(snapshotsubject.data["color"])),
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                
-                children: <Widget>[
-                  Text(
-                    snapshot.data["name"],
-                    style: TextStyle(fontSize: 14.0),
+            child: Dismissible(
+              key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+              background: Container(
+                color: Colors.red,
+                child: Align(
+                  alignment: Alignment(-0.9, 0.0),
+                  child: Icon(
+                    FontAwesomeIcons.trash,
+                    color: Colors.white,
                   ),
-                  IconButton(
-                    padding: EdgeInsets.only(left: 65),
-                    alignment: Alignment.centerRight,
-                    icon: Icon(FontAwesomeIcons.solidTrashAlt, color: Color(int.parse(snapshotsubject.data["color"])),),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
+                ),
               ),
+              direction: DismissDirection.startToEnd,
+              child: ListTile(
+                leading: CircleAvatar(
+                  child: Text(
+                    (snapshot.data["number"]).toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  backgroundColor:
+                      Color(int.parse(snapshotsubject.data["color"])),
+                ),
+                title: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        snapshot.data["name"],
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              onDismissed: (direction) {
+                SubjectModel.of(context)
+                    .removeClass(snapshot.data["cid"], snapshotsubject);
+                Navigator.of(context).pop();
+              },
             ),
           )
         ],
@@ -83,7 +95,8 @@ class _ClassTileState extends State<ClassTile> {
                       child: Center(
                         child: Text(
                           (snapshot.data["number"]).toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -142,12 +155,41 @@ class _ClassTileState extends State<ClassTile> {
             children: <Widget>[
               Container(
                   padding: EdgeInsets.only(right: 16.0, left: 16.0),
-                  child: TextFormField(
-                    controller: nameController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration:
-                        InputDecoration(labelText: "Assunto(s) da Aula"),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextFormField(
+                          controller: nameController,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          decoration:
+                              InputDecoration(labelText: "Assunto(s) da Aula"),
+                        ),
+                      ),
+                      RaisedButton(
+                        child: Text(
+                          "Salvar",
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        textColor: Colors.white,
+                        elevation: 8.0,
+                        color: Color(int.parse(snapshotsubject.data["color"])),
+                        onPressed: () {
+                          classes.name = nameController.text;
+                          classes.number = (classes.number) + number;
+                          classes.exercicies =
+                              (classes.exercicies) + exercicies;
+                          classes.currentPage =
+                              (classes.currentPage) + currentPage;
+                          classes.endPage = (classes.endPage) + endPage;
+                          classes.percentHits =
+                              (classes.percentHits) + percentHits;
+                          SubjectModel.of(context)
+                              .updateClass(classes, snapshotsubject);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   )),
               SizedBox(height: 24.0),
               Row(
@@ -228,11 +270,6 @@ class _ClassTileState extends State<ClassTile> {
                       )
                     ],
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
                   Column(
                     children: <Widget>[
                       Text(
@@ -272,6 +309,11 @@ class _ClassTileState extends State<ClassTile> {
                       )
                     ],
                   ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
                   Column(
                     children: <Widget>[
                       Text(
@@ -309,11 +351,6 @@ class _ClassTileState extends State<ClassTile> {
                       )
                     ],
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
                   Column(
                     children: <Widget>[
                       Text(
@@ -353,37 +390,9 @@ class _ClassTileState extends State<ClassTile> {
                       )
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      RaisedButton(
-                        child: Text(
-                          "Salvar",
-                          style: TextStyle(fontSize: 18.0),
-                        ),
-                        textColor: Colors.white,
-                        elevation: 8.0,
-                        color: Color(int.parse(snapshotsubject.data["color"])),
-                        onPressed: () {
-                          classes.name = nameController.text;
-                          classes.number = (classes.number) + number;
-                          classes.exercicies =
-                              (classes.exercicies) + exercicies;
-                          classes.currentPage =
-                              (classes.currentPage) + currentPage;
-                          classes.endPage = (classes.endPage) + endPage;
-                          classes.percentHits =
-                              (classes.percentHits) + percentHits;
-                          SubjectModel.of(context)
-                              .updateClass(classes, snapshotsubject);
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  ),
                 ],
               ),
-              
-              SizedBox(height: 62.0),
+              SizedBox(height: 46.0),
             ],
           ),
         ),

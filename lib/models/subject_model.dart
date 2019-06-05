@@ -42,7 +42,10 @@ class SubjectModel extends Model {
      });
     notifyListeners();
   }
-  void removeClass(){
+  void removeClass(String cid, DocumentSnapshot snapshotsubject){
+    Firestore.instance.collection("user").document(user.firebaseUser.uid).collection("subjects").document(snapshotsubject.data["sid"]).collection("class").document(cid).delete();
+    //subjects.remove(subject);
+    notifyListeners();
 
     
   }

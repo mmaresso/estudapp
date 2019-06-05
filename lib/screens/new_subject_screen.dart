@@ -100,6 +100,7 @@ class _NewSubjectScreenState extends State<NewSubjectScreen> {
 
                         Future.delayed(Duration(seconds: 2)).then((_){
                           Navigator.of(context).pop();
+                           
                       });
                         },
                     ),
