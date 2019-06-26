@@ -53,7 +53,7 @@ class _ClassTileState extends State<ClassTile> {
                 leading: CircleAvatar(
                   child: Text(
                     (snapshot.data["number"]).toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,),
                   ),
                   backgroundColor:
                       Color(int.parse(snapshotsubject.data["color"])),
@@ -63,7 +63,7 @@ class _ClassTileState extends State<ClassTile> {
                     Expanded(
                       child: Text(
                         snapshot.data["name"],
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 16.0),
                       ),
                     ),
                   ],

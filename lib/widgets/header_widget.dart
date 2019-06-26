@@ -12,23 +12,22 @@ class HeaderWidget extends StatelessWidget {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
-            expandedHeight: 100.0,
+            //backgroundColor: Theme.of(context).primaryColor,
+            expandedHeight: 30.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
 
                 title: Text(headerText,
-                      style: TextStyle(
+                     /*  style: TextStyle(
                           color: Colors.white,
                           fontSize: 26.0,
                           fontFamily: "Chawp"
 
-                      )) ,
-                background: Image.network(
-                  "https://cdn.pixabay.com/photo/2015/12/01/15/43/black-1072366_960_720.jpg",
-                  fit: BoxFit.cover,
-                )),
+                      ) */) ,
+                      
+               ),
           ),
         ];
       },
