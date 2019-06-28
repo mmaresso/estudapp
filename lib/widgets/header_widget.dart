@@ -13,19 +13,21 @@ class HeaderWidget extends StatelessWidget {
         return <Widget>[
           SliverAppBar(
             //backgroundColor: Theme.of(context).primaryColor,
-            expandedHeight: 30.0,
+            expandedHeight: 70.0,
             floating: false,
             pinned: true,
+            forceElevated: true,
+            elevation: 16.0,
             flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
 
-                title: Text(headerText,
+                title:  Container(  child: Text(headerText,
                      /*  style: TextStyle(
                           color: Colors.white,
                           fontSize: 26.0,
                           fontFamily: "Chawp"
 
-                      ) */) ,
+                      ) */) ,)
                       
                ),
           ),

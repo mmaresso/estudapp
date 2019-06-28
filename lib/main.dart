@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             title: 'EstudApp',
             theme: new ThemeData(
                 primarySwatch: Colors.blue,
-                primaryColor: Colors.indigo
+                primaryColor: Color.fromRGBO(58, 66, 86, 1.0)
             ),
             debugShowCheckedModeBanner: false,
             home: HomeScreen(model),
