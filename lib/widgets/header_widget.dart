@@ -22,12 +22,12 @@ class HeaderWidget extends StatelessWidget {
                 centerTitle: true,
 
                 title:  Container(  child: Text(headerText,
-                     /*  style: TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
-                          fontSize: 26.0,
+                          fontSize: 22.0,
                           fontFamily: "Chawp"
 
-                      ) */) ,)
+                      )) ,)
                       
                ),
           ),
