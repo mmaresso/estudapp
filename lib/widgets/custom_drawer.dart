@@ -28,10 +28,12 @@ class CustomDrawer extends StatelessWidget {
                       Container(
                         height: 160.0,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://images.pexels.com/photos/916017/pexels-photo-916017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
-                              fit: BoxFit.cover),
+                          gradient: LinearGradient(
+                            colors: [const Color(0xFF3A4256),
+                                     const Color(0xFF718792),],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight
+                          ),
                         ),
                       ),
                       Container(
@@ -44,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(26.0, 110.0, 160.0, 10),
-                        child: Text("Olá ${!model.isLoggedIn()? "visitante": model.userData["name"]}! \n", style: TextStyle(color: Colors.white, fontSize: 16.0),),
+                        child: Text("Olá, ${!model.isLoggedIn()? "visitante": model.userData["name"]}! \n", style: TextStyle(color: Colors.white, fontSize: 16.0),),
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(260.0, 20.0, 0.0, 10),
